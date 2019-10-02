@@ -7,7 +7,7 @@ import re
 import math
 
 class Iteration(cmd.Cmd):
-    prompt = '>> '
+    prompt = ''
 
     def __init__(self):
         cmd.Cmd.__init__(self, completekey=None)
@@ -79,7 +79,9 @@ class Graph(object):
         str = 'V = {\n'
         for v, v_id in sorted(self.vertex_list.items(), key=lambda x: x[1]):
             if type(v[0]) == 'float' or type(v[1]) == 'float':
-                xcrd, ycrd = int(round(v[0], 2)), int(round(v[1], 2))
+                # xcrd, ycrd = int(round(v[0], 2)), int(round(v[1], 2))
+                xcrd, ycrd = round(v[0], 2), round(v[1], 2)
+
             else:
                 xcrd, ycrd = v[0], v[1]
             str += '  {0}: ({1},{2})\n'.format( v_id, xcrd, ycrd)
@@ -265,7 +267,7 @@ def distance(p1, p2):
     return dist
 
 def intersect(p1, p2, p3, p4):
-    
+
     x1, y1 = p1[0], p1[1]
     x2, y2 = p2[0], p2[1]
     x3, y3 = p3[0], p3[1]
@@ -320,7 +322,7 @@ def intersect(p1, p2, p3, p4):
     if (xcrd < x_interval[0] or xcrd > x_interval[1] or ycrd < y_interval[0] or ycrd > y_interval[1]):
         return []
 
-    return [(int(round(xcrd,2)), int(round(ycrd,2)))]
+    return [(round(xcrd,2), round(ycrd,2))]
 
 def main(args):
     prgobj = Iteration()
@@ -330,4 +332,3 @@ def main(args):
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))
-    
